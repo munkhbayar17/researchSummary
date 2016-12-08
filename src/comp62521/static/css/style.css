@@ -1,0 +1,178 @@
+html {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+body{
+    padding: 0px 3% 0px 3%;
+    background: url("bg-white.gif");
+}
+
+/* tables */
+table {
+    background-color: #CDCDCD;
+    margin:10px 0pt 15px;
+    font-size: 8pt;
+    font-family: Calibri;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+table thead tr th, table tfoot tr th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 12px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
+table thead tr .header {
+    background-image: url(bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+table tbody td {
+    color: #3D3D3D;
+    padding: 6px;
+    font-size: 10pt;
+    background-color: #FFF;
+    vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+    background-color:#F0F0F6;
+}
+table tbody tr.odd td {
+    background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+    background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+    background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #4CAF70;
+}
+
+table td, table th{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+/* a link */
+
+th a:link, th a:visited {
+    color: white;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+th a:hover, a:active{
+    text-decoration: underline;
+}
+
+#menuList ul{
+    list-style-type: none;
+}
+
+#menuList li{
+    margin-bottom: 5px;
+}
+
+#menuList li a{
+    font-size: 13px;
+}
+
+#menuList li a:link, #menuList li a:visited {
+    background-color: #FFA233;
+    max-width: 200px;
+    min-width: 200px;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+#menuList li a:hover, #menuList li a:active {
+    background-color: #FFA233;
+}
+
+/*form*/
+input, select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input:focus {
+    border: 3px solid #555;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #FFA233;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+label{
+    font-size: 18px;
+    padding-right: 10px;
+}
+
+#datafile{
+    float: right;
+}
+
+#content > table > tbody > tr > td > a {
+    font-weight: bold;
+    text-decoration: initial;
+}
+
+#navigation img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#menuList{
+    position: absolute;
+    background: url("bg-white.gif");
+    max-width: 280px;
+    transition: all linear 0.5s;
+    transition-duration: 0.5s;
+    z-index: 1;
+}
+
+.ng-hide {
+    height: 0;
+    width: 0;
+    background-color: transparent;
+    top:-200px;
+    left: 200px;
+    display: none !important;
+}
+
+#mainMenu{
+    padding: 0px 3% 0px 3%;
+}
+
+/* form */
+
+#myForm  { display: table;      }
+#myForm	p     { display: table-row;  }
+#myForm	p label { display: table-cell; }
+#myForm	p input { display: table-cell; }

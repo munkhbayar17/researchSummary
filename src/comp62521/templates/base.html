@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery-latest.js')}}"></script> 
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.tablesorter.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/style.css')}}">
+    </head>
+    <body>
+        <div ng-app="researchApp" ng-init="menuShow=true" ng-controller="menuCtrl" id="page">
+            <div id="header">
+                <span id="datafile">Loaded database: {{ args.dataset}}</span>
+                <div id="navigation">
+                    <a href="/index"><img src="{{ url_for('static', filename = 'css/home.png')}}" width="50px" height="50px"/></a>
+                    <img id="imgMenu" ng-click="menuFunc()" src="{{ url_for('static', filename = 'css/menu.png')}}" width="50px" height="50px"/>
+                </div>
+            </div>
+            <div ng-hide="menuShow" id="menuList" style="display:none; margin-left: -3%;">
+                <ul style="padding:0;">
+                    <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
+                    <li><a href="/statisticsdetails/publication_author">Publication by Author</a></li>
+                    <li><a href="/statisticsdetails/publication_year">Publication by Year</a></li>
+                    <li><a href="/statisticsdetails/author_year">Author by Year</a></li>
+                    <li><a href="/averages">Averaged Year Data</a></li>
+                    <li><a href="/coauthors">Co-Authors</a></li>
+                    <li><a href="/stats">Statistics for Authors</a></li>
+                    <li><a href="/degrees">Degrees of	Separation</a></li>
+                </ul>
+            </div>
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function () {
+            $(".tablesorter").tablesorter();
+            $("#menuList").show();
+        });
+    </script>
+    <script>
+        var app = angular.module('researchApp', []);
+        app.controller('menuCtrl', function ($scope) {
+            $scope.menuShow = false;
+            $scope.menuFunc = function () {
+                $scope.menuShow = !$scope.menuShow;
+                if(!$scope.menuShow)
+                    $("#content").css("opacity", 0.2);
+                else
+                    $("#content").css("opacity", 1);
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<form name="input" action="/degrees" method="get" data-ajax="false" onSubmit="validateForm(this)">
+    <input type="text" name="author_name_1" value="{{ args.author_name_1 }}" placeholder="Author name">
+    <input type="text" name="author_name_2" value="{{ args.author_name_2 }}" placeholder="Author name">
+    <input type="submit" value="Submit">
+</form>
+<table class="tablesorter">
+  <thead>
+    <tr>
+    {% for column in args.data[0] %}
+      <th>{{ column }}</th>
+    {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in args.data[1] %}
+    <tr>
+    {% for data_item in row %}
+      <td>{{ data_item }}</td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<br/>
+{% endblock %}

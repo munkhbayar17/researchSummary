@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Research summary</title>
+        <meta name="author" content="Alvaro Trigo Lopez" />
+        <meta name="description" content="fullPage full-screen apple iphone 5c similar website. Reproducing one sigle scrolling site like Apple iPhone." />
+        <meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,apple,iphone5c,iphone5s,iphone,iphone-5c,like,reproduce,similar,how to" />
+        <meta name="Resource-type" content="Document" />
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/jquery.fullPage.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/example.css')}}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/design.css')}}" />
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename = 'js/jquery.fullPage.js')}}"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='js/example.js') }}"></script>-->
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#fullpage').fullpage({
+                    'verticalCentered': false,
+                    'css3': true,
+                    'sectionsColor': ['#F0F2F4', '#fff', '#fff', '#fff'],
+                    'navigation': true,
+                    'navigationPosition': 'right',
+                    'navigationTooltips': ['Home', 'Publication Summary', 'Publication by Author', 'Publication by Year'
+                                , 'Author by Year', 'Averaged Year Data', 'Co-Authors', 'Statistics of Author', 'Graph data'],
+                    'afterLoad': function (anchorLink, index) {
+
+                    },
+                    'onLeave': function (index, nextIndex, direction) {
+                        if (index == 8 && direction == 'down') {
+                            $('.section').eq(index - 1).removeClass('moveDown').addClass('moveUp');
+                        }
+                        else if (index == 8 && direction == 'up') {
+                            $('.section').eq(index - 1).removeClass('moveUp').addClass('moveDown');
+                        }
+
+                        $('#staticImg').toggleClass('active', (index == 2 && direction == 'down') || (index == 4 && direction == 'up'));
+                        $('#staticImg').toggleClass('moveDown', nextIndex == 4);
+                        $('#staticImg').toggleClass('moveUp', index == 4 && direction == 'up');
+                    }
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <div ng-app="researchApp" ng-init="menuShow = true" ng-controller="menuCtrl">
+            <div id="mainMenu">
+                <img id="imgMenu" ng-click="menuFunc()" src="{{ url_for('static', filename = 'css/menu.png')}}" width="50px" height="50px"/>
+            </div>
+            <div ng-hide="menuShow" id="menuList" style="display: none; z-index:1; margin-top:80px; background:url('bg-green.gif')">
+                <ul>
+                    <li><a href="/statisticsdetails/publication_summary">Publication Summary</a></li>
+                    <li><a href="/statisticsdetails/publication_author">Publication by Author</a></li>
+                    <li><a href="/statisticsdetails/publication_year">Publication by Year</a></li>
+                    <li><a href="/statisticsdetails/author_year">Author by Year</a></li>
+                    <li><a href="/averages">Averaged Year Data</a></li>
+                    <li><a href="/coauthors">Co-Authors</a></li>
+                    <li><a href="/stats">Statistics for Authors</a></li>
+                    <li><a href="/degrees">Graph data</a></li>
+                </ul>
+            </div>
+            <div id="fullpage">
+
+                <div class="section sectionEven" id="section0" data-anchor="home">
+                    <h1>Research summary</h1>
+                    <div id="menuBoxes">
+			<p>
+                        <div id="menuRow">
+                            <ul>
+                                <li>
+                                    <a href="/statisticsdetails/publication_summary">
+                                        <img src="{{ url_for('static', filename = 'css/pub.png')}}"/>
+                                        <span>Publication summary</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/statisticsdetails/publication_author">
+                                        <img src="{{ url_for('static', filename = 'css/author.png')}}"/>
+                                        <span>Publication by Author</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/statisticsdetails/publication_year">
+                                        <img src="{{ url_for('static', filename = 'css/pub.png')}}"/>
+                                        <span>Publication by Year</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/statisticsdetails/author_year">
+                                        <img src="{{ url_for('static', filename = 'css/author.png')}}"/>
+                                        <span>Author by Year</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+			</p>
+			<p>
+                        <div id="menuRow">
+                            <ul>
+                                <li>
+                                    <a href="/averages">
+                                        <img src="{{ url_for('static', filename = 'css/average.png')}}"/>
+                                        <span>Average Year Data</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/coauthors">
+                                        <img src="{{ url_for('static', filename = 'css/coauthors.png')}}"/>
+                                        <span>Co-Authors</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/stats">
+                                        <img src="{{ url_for('static', filename = 'css/author.png')}}"/>
+                                        <span>Statistics for Author</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/degrees">
+                                        <img src="{{ url_for('static', filename = 'css/graph.png')}}"/>
+                                        <span>Graph data</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+			</p>
+                    </div>
+                </div>
+
+                <div class="section sectionOdd" id="section1" data-anchor="pubsum">
+                    <h1>Publication by Summary</h1>
+                    <br>
+ 		    <br>
+                    <p>Summary of all publications</p>
+                    <br>
+                    <img src="{{ url_for('static', filename = 'img/pubsum.jpg')}}">
+                    <br>
+                    <br>
+                    <span id="navigation">
+                        <a href="/statisticsdetails/publication_summary">Go to ..</a>
+                    </span>
+                </div>
+                <div class="section sectionEven" id="section2" data-anchor="pubauthor">
+                    <h1>Publication by Author</h1>
+                    <br>
+		    <br>
+                    <div id="intro">
+                        <p>You can see number of publications by each author grouped by following publication types:
+                        </p>
+                        <ul style="list-style-type: square;">
+                            <li>Conference Paper</li>
+                            <li>Journal Article</li>
+                            <li>Book</li>
+                            <li>Book Chapter</li>
+                        </ul>
+                        <p>Moreover, if you click on authors name it leads to author's page</p>
+                    </div>
+                    <br>
+                    <img src="{{ url_for('static', filename = 'img/authorpub.jpg')}}">
+                    <br>
+		    <br>
+                    <span id="navigation2">
+                        <a href="/statisticsdetails/publication_author">Go to ..</a>
+                    </span>
+                </div>
+
+                <div class="section moveDown sectionOdd" id="section3" data-anchor="pubyear">
+                    <h1>Publication by Year</h1>
+                    <br><br>
+                    <div id="intro">
+                        <p>All publications are summarized by publication year:
+                        </p>
+                        <ul style="list-style-type: square;">
+                            <li>Conference Paper</li>
+                            <li>Journal Article</li>
+                            <li>Book</li>
+                            <li>Book Chapter</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <img src="{{ url_for('static', filename = 'img/pubyear.jpg')}}">
+                    <br>
+		    <br>
+                    <span id="navigation">
+                        <a href="/statisticsdetails/publication_year">Go to ..</a>
+                    </span>
+                </div>
+                <div class="section moveDown sectionEven" id="section4" data-anchor="authoryear">
+                    <h1>Author by Year</h1>
+                    <br><br>
+                    <div id="intro">
+                        <p>Number of authors are summarized by publication year:
+                        </p>
+                    </div>
+                    <br>
+                    <img src="{{ url_for('static', filename = 'img/pubyear.jpg')}}">
+                    <br>
+                    <br>
+                    <span id="navigation2">
+                        <a href="/statisticsdetails/publication_year">Go to ..</a>
+                    </span>
+                </div>
+
+                <div class="section moveDown sectionOdd" id="section5" data-anchor="averageyear">
+                    <h1>Averaged Year Data</h1>
+                    <br><br>
+                    <div id="intro">
+                        <p>Following average data can be found measured with mean, media, and mode:
+                        </p>
+                        <ul style="list-style-type: square;">
+                            <li>Average Authors per Publication</li>
+                            <li>Average Publications per Author</li>
+                            <li>Average Publications in a Year</li>
+                            <li>Average Authors in a Year</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <br>
+                    <span id="navigation">
+                        <a href="/averages">Go to ..</a>
+                    </span>
+                </div>
+                <div class="section moveDown sectionEven" id="section6" data-anchor="coauthors">
+                    <h1>Number of Co-Authors</h1>
+                    <div id="intro">
+                        <p>Authors' co-author count can be searched with filters below:</p>
+                        <ul style="list-style-type: square;">
+                            <li>Publication year</li>
+                            <li>Publication type (Conference Paper, Journal Article, Book, Book Chapter)</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <br>
+                    <span id="navigation2">
+                        <a href="/coauthors">Go to ..</a>
+                    </span>
+                </div>
+
+                <div class="section moveDown sectionOdd" id="section7" data-anchor="authorstats">
+                    <h1>Statistics for Author</h1>
+		    <br><br>
+                    <div id="intro">
+                        <p>You can search by author's name and authors' statistic can be found. Results:
+                        </p>
+                        <ul style="list-style-type: square;">
+                            <li>Publication counts (Conference Paper, Journal Article, Book, Book Chapter)</li>
+                            <li>Authors counts of first, last, and sole author</li>
+                        </ul>
+                        <p>Moreover, if you click on authors name it leads to author's page</p>
+                    </div>
+                    <br>
+                    <br>
+                    <span id="navigation">
+                        <a href="/stats">Go to ..</a>
+                    </span>
+                </div>
+                <div class="section moveDown sectionEven" id="section8" data-anchor="degrees">
+                    <h1>Graph data</h1>
+                    <br><br>
+                    <div id="intro">
+                        <p>You can give two authors and get their degrees of separation</p>
+                        <p>Degrees of separation is drawn in graphs</p>
+                    </div>
+                    <br>
+                    <br>
+                    <span id="navigation2">
+                        <a href="/degrees">Go to ..</a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </body>
+    <script>
+        $(document).ready(function () {
+            $("#menuList").show();
+        });
+    </script>
+    <script>
+        var app = angular.module('researchApp', []);
+        app.controller('menuCtrl', function ($scope) {
+            $scope.menuShow = false;
+            $scope.menuFunc = function () {
+                $scope.menuShow = !$scope.menuShow;
+                if (!$scope.menuShow)
+                    $("#fullpage").css("opacity", 0.2);
+                else
+                    $("#fullpage").css("opacity", 1);
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ args.title }}</h1>
+
+<table>
+  <thead>
+    <tr>
+    {% for column in args.data[0] %}
+      <th><a href="?key_name={{ args.mapping[column] }}&descending={{ args.descending[args.mapping[column]] }}">{{ column }}</a></th>
+    {% endfor %}
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for row in args.data[1] %}
+  <tr>
+  {% for data_item in row %}
+  {% if loop.first %}
+    <td><a href="/name/{{data_item}}" target="_blank">{{ data_item }}</a></td>
+  {% else %}
+    <td>{{ data_item }}</td>
+  {% endif %}
+  {% endfor %}
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

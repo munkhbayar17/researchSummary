@@ -1,0 +1,9 @@
+*.pyc
+*.swp
+src/setup.py
+.project
+.pydevproject
+venv/
+.coverage
+htmlcov/
+nbproject/

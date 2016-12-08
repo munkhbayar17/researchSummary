@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}{{ args.title }}{% endblock %}
+{% block content %}
+<div>
+    <h1>{{ args.title }}</h1>
+</div>
+<div>
+    <form id="myForm" name="input" action="/coauthors" method="get" data-ajax="false" onSubmit="validateForm(this)">
+
+        <p>
+            <label for="startYear">Start year</label> 
+            <input type="number" id="startYear" name="start_year" min="{{ args.min_year }}" max="{{ args.max_year }}" value="{{ args.start_year }}"/>
+        </p>
+        <p>
+            <label id="endYear">End year</label>
+            <input type="number" id="endYear" name="end_year" min="{{ args.min_year }}" max="{{ args.max_year }}" value="{{ args.end_year }}"/>
+        </p>
+        <p>
+            <label id="pubType">Publication type</label>
+            <select name="pub_type" id="pubType">
+                <option value="4">All Publications</option>
+                <option value="0"{% if args.pub_type == 0 %} selected="selected"{% endif %}>Conference Paper</option>
+                <option value="1"{% if args.pub_type == 1 %} selected="selected"{% endif %}>Journal</option>
+                <option value="2"{% if args.pub_type == 2 %} selected="selected"{% endif %}>Book</option>
+                <option value="3"{% if args.pub_type == 3 %} selected="selected"{% endif %}>Book Chapter</option>
+            </select>
+            <input type="submit" value="Submit" style="margin-left: 10px;">
+        </p>
+    </form>
+</div>
+<div>
+    <h1>{{ args.pub_str }} in {{ args.start_year }} {% if args.start_year != args.end_year %} - {{ args.end_year }}{% endif %}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                {% for column in args.data[0] %}
+                <th><a href="?key_name={{ args.mapping[column] }}&descending={{ args.descending[args.mapping[column]] }}">{{ column }}</a></th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in args.data[1] %}
+            <tr>
+                {% for data_item in row %}
+                {% if loop.first %}
+                <td><a href="/name/{{ data_item }}" target="_blank">{{ data_item }}</a></td>
+                {% else %}
+                <td>{{ data_item }}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                {% for column in args.data[0] %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<script>
+    function validateForm(form) {
+        start_year = form["start_year"].value;
+        end_year = form["end_year"].value;
+        if (end_year < start_year) {
+            alert("Invalid date range");
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock %}
